@@ -1,3 +1,24 @@
+# Goals
+
+[x] Connect to the smart bike.
+[ ] Retrieve details about cadence (rpm) and speed (km/h).
+[ ] Retrieve details about power (watts).
+[ ] Control resistance.
+[ ] Make simple UI. Ride straight and collect gold coins.
+[ ] Gamify it! Hit specific power or cadence to avoid obstacles that make you lose gold coins.
+
+# Resources
+
+- [Google Documentation - Using Web Bluetooth API with Javascript](https://developer.chrome.com/articles/bluetooth/#read)
+- [Tacx Links to Relevant Bluetooth API Services](https://developer.garmin.com/tacx-trainer/overview/)
+- [UUIDs for Services and Characteristics](https://gist.github.com/sam016/4abe921b5a9ee27f67b3686910293026)
+- [Cycling Speed and Cadence Characteristic](https://www.bluetooth.com/specifications/specs/cycling-speed-and-cadence-service-1-0/)
+  - Contains information about the bits and what they represent.
+- [PyCycling](https://zacharybull.com/pycycling/pycycling.cycling_speed_cadence_service.html)
+  - While this project is in Python, it contains some interesting details about working with a smart bike.
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
