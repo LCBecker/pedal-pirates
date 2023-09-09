@@ -1,11 +1,11 @@
 # Goals
 
-[x] Connect to the smart bike.
-[ ] Retrieve details about cadence (rpm) and speed (km/h).
-[ ] Retrieve details about power (watts).
-[ ] Control resistance.
-[ ] Make simple UI. Ride straight and collect gold coins.
-[ ] Gamify it! Hit specific power or cadence to avoid obstacles that make you lose gold coins.
+- [x] Connect to the smart bike.
+- [ ] Retrieve details about cadence (rpm) and speed (km/h).
+- [ ] Retrieve details about power (watts).
+- [ ] Control resistance.
+- [ ] Make simple UI. Ride straight and collect gold coins.
+- [ ] Gamify it! Hit specific power or cadence to avoid obstacles that make you lose gold coins.
 
 # Resources
 
