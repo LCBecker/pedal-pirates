@@ -1,6 +1,15 @@
-import "./App.css";
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Drawer,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 
 import Canvas from "./components/Canvas";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Stack } from "@mui/system";
 import { useState } from "react";
 
 /**
@@ -110,6 +119,7 @@ function App() {
     if (device && device?.gatt && device?.gatt.connected) {
       try {
         await device.gatt.disconnect();
+        setDevice(null);
         console.log("Disconnected");
       } catch (error) {
         console.error("could not disconnect");
@@ -121,6 +131,7 @@ function App() {
 
   function onDisconnected(event: Event) {
     const device = event.target as BluetoothDevice;
+    setDevice(null);
     console.log(`Device ${device.name} is disconnected.`);
   }
 
@@ -310,11 +321,60 @@ function App() {
   }
 
   return (
-    <>
-      <button onClick={() => connectDevice()}>Connect Device</button>
-      <button onClick={() => disconnectDevice()}>Disconnect Device</button>
-      <Canvas />
-    </>
+    <Box sx={{ display: "flex", backgroundColor: "#1a1a1a" }}>
+      <CssBaseline />
+      <Drawer
+        variant="permanent"
+        anchor="top"
+        PaperProps={{
+          elevation: 3,
+          sx: { padding: "1em", backgroundColor: "#cfcfcf" },
+        }}
+      >
+        {!device && (
+          <Stack direction="row" spacing={1}>
+            <Button variant="contained" onClick={() => connectDevice()}>
+              Connect Device
+            </Button>
+          </Stack>
+        )}
+        {device && (
+          <Stack direction="row" justifyContent="space-evenly">
+            <Button variant="outlined" onClick={() => disconnectDevice()}>
+              Disconnect Device
+            </Button>
+            <Typography variant="h5">0 Watts</Typography>
+            <Typography variant="h5">0 RPM</Typography>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <FavoriteIcon color="error" />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ minWidth: "200px", mr: 1 }}>
+                  <LinearProgress
+                    color="error"
+                    variant="determinate"
+                    value={100}
+                  />
+                </Box>
+                <Box sx={{ minWidth: 35 }}>
+                  <Typography variant="body2" color="text.error">
+                    100%
+                  </Typography>
+                </Box>
+              </Box>
+            </Stack>
+          </Stack>
+        )}
+      </Drawer>
+      <Box
+        sx={{
+          overflowX: "hidden",
+          overflowY: "hidden",
+          backgroundColor: "#1a1a1a",
+        }}
+      >
+        <Canvas />
+      </Box>
+    </Box>
   );
 }
 

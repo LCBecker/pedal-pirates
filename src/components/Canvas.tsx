@@ -7,6 +7,21 @@ function Canvas() {
   const [backgroundImage, setBackgroundImage] =
     useState<HTMLImageElement | null>(null);
 
+  const handleResize = () => {
+    const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
+    if (!canvas) {
+      return;
+    }
+
+    // Calculate canvas width based on screen width
+    const screenWidth = window.innerWidth;
+    const canvasWidth = screenWidth;
+    const canvasHeight = (canvasWidth * 500) / 800; // Maintain 800x500 ratio
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+  };
+
   useEffect(() => {
     const spriteImageUrls = [
       "/sprites/goldCoins/Gold_21.png",
@@ -46,6 +61,14 @@ function Canvas() {
     loadImages();
   }, []);
 
+  // Add a resize event listener to handle canvas resizing
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     if (goldCoinSprites.length > 0 && backgroundImage) {
       const canvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
@@ -53,8 +76,7 @@ function Canvas() {
         return;
       }
 
-      canvas.width = 800; // Adjust as needed
-      canvas.height = 500; // Adjust as needed
+      handleResize();
 
       const context = canvas.getContext("2d");
       if (!context) {
