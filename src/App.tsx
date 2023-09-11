@@ -1,5 +1,6 @@
 import "./App.css";
 
+import Canvas from "./components/Canvas";
 import { useState } from "react";
 
 /**
@@ -88,7 +89,6 @@ function App() {
         let service = await server.getPrimaryService(
           "00001816-0000-1000-8000-00805f9b34fb"
         );
-        console.log("services", service);
 
         let cadence = await service.getCharacteristic(
           "00002a5b-0000-1000-8000-00805f9b34fb"
@@ -313,6 +313,7 @@ function App() {
     <>
       <button onClick={() => connectDevice()}>Connect Device</button>
       <button onClick={() => disconnectDevice()}>Disconnect Device</button>
+      <Canvas />
     </>
   );
 }
